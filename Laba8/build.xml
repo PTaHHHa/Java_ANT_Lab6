@@ -1,0 +1,31 @@
+<project name="Laba8" default="run">
+
+    <target name="clean">
+        <echo>Cleaning</echo>
+        <delete dir="build"/>
+        <delete dir="bin"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <echo>Compiling</echo>
+        <mkdir dir="build/classes"/>
+        <javac destdir="build/classes" includeantruntime="false">
+            <src path="src"/>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <echo>Creating JAR-file</echo>
+        <mkdir dir="bin"/>
+        <jar destfile="bin/${ant.project.name}.jar" basedir="src">
+            <manifest>
+                <attribute name="Main-Class" value="Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar">
+        <echo>Running JAR-file</echo>
+        <java jar="bin/Laba8.jar" fork="true"/>
+    </target>
+</project>
